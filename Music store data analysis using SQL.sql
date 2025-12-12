@@ -2,16 +2,14 @@
 
 /* Q1: Who is the senior most employee based on job title? */
 
-SELECT title, last_name, first_name 
-FROM employee
+SELECT title, last_name, first_name FROM employee
 ORDER BY levels DESC
 LIMIT 1
 
 
 /* Q2: Which countries have the most Invoices? */
 
-SELECT COUNT(*) AS c, billing_country 
-FROM invoice
+SELECT COUNT(*) AS c, billing_country FROM invoice
 GROUP BY billing_country
 ORDER BY c DESC
 
@@ -27,7 +25,7 @@ ORDER BY total DESC
 Write a query that returns one city that has the highest sum of invoice totals. 
 Return both the city name & sum of all invoice totals */
 
-SELECT billing_city,SUM(total) AS InvoiceTotal
+SELECT billing_city, SUM(total) AS InvoiceTotal
 FROM invoice
 GROUP BY billing_city
 ORDER BY InvoiceTotal DESC
@@ -63,18 +61,6 @@ WHERE track_id IN(
 	JOIN genre ON track.genre_id = genre.genre_id
 	WHERE genre.name LIKE 'Rock'
 )
-ORDER BY email;
-
-
-/* Method 2 */
-
-SELECT DISTINCT email AS Email,first_name AS FirstName, last_name AS LastName, genre.name AS Name
-FROM customer
-JOIN invoice ON invoice.customer_id = customer.customer_id
-JOIN invoiceline ON invoiceline.invoice_id = invoice.invoice_id
-JOIN track ON track.track_id = invoiceline.track_id
-JOIN genre ON genre.genre_id = track.genre_id
-WHERE genre.name LIKE 'Rock'
 ORDER BY email;
 
 
